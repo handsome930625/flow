@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.charse.com.cn"
+           xmlns="http://www.charse.com.cn"
+           elementFormDefault="qualified">
+
+    <xs:element name="taskflows">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="taskflow">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="filters" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="filter" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation><![CDATA[
+                                                        if use spring,please write id attribute.
+                                                        if don't use spring,please write class attribute.
+                                                                    ]]>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="bean-id" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation><![CDATA[
+                                                        input spring ioc bean id
+                                                                    ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="class-name" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation source="java:java.lang.Class"><![CDATA[
+                                                        input classname.
+                                                                    ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="task" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="invoke">
+                                            <xs:annotation>
+                                                <xs:documentation><![CDATA[
+                                                        if use spring,please write id attribute.
+                                                        if don't use spring,please write class attribute.
+                                                                    ]]>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="bean-id" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation><![CDATA[
+                                                        input spring ioc bean id
+                                                                    ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="class-name" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation source="java:java.lang.Class"><![CDATA[
+                                                        input classname.
+                                                                    ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="results" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="result" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:attribute name="road" type="xs:string" use="required"
+                                                                          default="R1"/>
+                                                            <xs:attribute name="next-stop" type="xs:string"
+                                                                          use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="task-id" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attribute name="start-task" type="xs:string" use="required"/>
+                        <xs:attribute name="use-spring" type="xs:boolean" use="required"/>
+                        <xs:attribute name="validate" type="xs:boolean" use="required" default="false"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
