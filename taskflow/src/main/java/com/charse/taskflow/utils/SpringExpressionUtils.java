@@ -44,11 +44,11 @@ public class SpringExpressionUtils {
      * @param clazz           反射得到的值
      * @return 解析后SpEL表达式对应的值
      */
-    public  <T> T parseSpel(String expression, Map<String, Object> contextParamMap, Class<T> clazz) {
+    public <T> T parseSpel(String expression, Map<String, Object> contextParamMap, Class<T> clazz) {
         // 构造上下文
         EvaluationContext context = new StandardEvaluationContext();
-        for (String paramName : contextParamMap.keySet()) {
-            context.setVariable(paramName, contextParamMap.get(paramName));
+        for (Map.Entry<String, Object> entry : contextParamMap.entrySet()) {
+            context.setVariable(entry.getKey(), entry.getValue());
         }
         return expressionParser.parseExpression(expression).getValue(context, clazz);
     }
