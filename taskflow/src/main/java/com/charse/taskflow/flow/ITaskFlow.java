@@ -6,7 +6,7 @@ import java.util.Map;
  * description: 这边使用了泛型，用户自定义入参和返回值
  * 定义一个taskflow的基础方法
  *
- * @author 王亦杰（yijie.wang01@ucarinc.com）
+ * @author 王亦杰
  * @version 1.0
  * @date 2018/8/24 14:43
  */
