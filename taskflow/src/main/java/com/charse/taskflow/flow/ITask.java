@@ -1,7 +1,7 @@
 package com.charse.taskflow.flow;
 
 /**
- * description:
+ * description: taskflow 内部task
  *
  * @author 王亦杰
  * @version 1.0

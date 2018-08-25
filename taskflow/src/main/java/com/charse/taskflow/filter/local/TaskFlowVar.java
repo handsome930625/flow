@@ -3,7 +3,7 @@ package com.charse.taskflow.filter.local;
 import java.util.UUID;
 
 /**
- * description:
+ * description: 用来记录taskflow执行情况
  *
  * @author wangyj on 2018/4/13
  */

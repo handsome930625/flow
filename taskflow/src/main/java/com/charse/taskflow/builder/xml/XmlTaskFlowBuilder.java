@@ -29,7 +29,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * description:
+ * description: taskflow 配置文件xml 解析器
  *
  * @author 王亦杰
  * @version 1.0
@@ -40,11 +40,20 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
      * 日志
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlTaskFlowBuilder.class);
-
+    /**
+     * 解析出来的全部taskflow的节点都会包含在这个对象里面
+     */
     private TaskFlowsNode taskFlowsNode;
-
+    /**
+     * xml 解析器
+     */
     private XStream xmlConfigureParser;
 
+    /**
+     * 初始化这个builder并且解析配置文件
+     *
+     * @param taskflowXmlPaths xml配置文件的路径
+     */
     public XmlTaskFlowBuilder(String taskflowXmlPaths) {
         assert (StringUtils.isNotBlank(taskflowXmlPaths)) : "taskFlow xml config path is blank!!!";
         String[] xmlPaths = taskflowXmlPaths.split(",");
@@ -115,7 +124,7 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
      * @param resource 需要解析的文件
      * @return 每个文件解析的结果
      */
-    private TaskFlowsNode parseImpl(File resource) throws IOException, SAXException {
+    private TaskFlowsNode parseImpl(File resource) {
         return (TaskFlowsNode) xmlConfigureParser.fromXML(resource);
     }
 
@@ -127,22 +136,32 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
             Boolean useSpring = taskFlowNode.getUseSpring();
             Boolean validate = taskFlowNode.getValidate();
             DefaultTaskFlow defaultTaskFlow = new DefaultTaskFlow();
+            // 设置基础属性
             initBase(defaultTaskFlow, taskFlowNode);
+            // 设置过滤器
             initFilter(defaultTaskFlow, taskFlowNode.getFilters(), useSpring);
+            // 设置任务方法类
             initTask(defaultTaskFlow, taskFlowNode.getTaskList(), useSpring);
+            // 校验配置文件的正确性
             validate(defaultTaskFlow, validate);
             taskFlowList.add(defaultTaskFlow);
         }
         return taskFlowList;
     }
 
+    /**
+     * 检验xml配置是否合法
+     *
+     * @param defaultTaskFlow 默认的 taskflow 实现类
+     * @param validate        是否开启校验
+     */
     private void validate(DefaultTaskFlow defaultTaskFlow, Boolean validate) {
         /*
           开始校验
           1.校验 startTask 是否可达
           2.校验 next-stop 是否可达
          */
-        if (validate) {
+        if (validate != null && validate) {
             ITask startTask = defaultTaskFlow.getStartTask();
             if (startTask == null) {
                 throw new DefinitionException("There is no corresponding startTask,flow id is "
@@ -166,6 +185,15 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
         }
     }
 
+    /**
+     * 将xml中配置的task注入到 defaultTaskFlow 里
+     *
+     * @param defaultTaskFlow 默认的 taskflow 实现类
+     * @param taskList        xml 对应的 java 对象
+     * @param useSpring       是否使用spring ico 容器
+     * @throws ClassNotFoundException         找不到class 异常
+     * @throws OperationNotSupportedException 操作不支持异常
+     */
     private void initTask(DefaultTaskFlow defaultTaskFlow, List<TaskNode> taskList, Boolean useSpring) throws ClassNotFoundException, OperationNotSupportedException {
         Map<String, ITask> taskMap = new HashMap<>();
         for (TaskNode taskNode : taskList) {
@@ -196,6 +224,15 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
         defaultTaskFlow.setTask(taskMap);
     }
 
+    /**
+     * 将xml中配置的过滤器注入到 defaultTaskFlow 里
+     *
+     * @param defaultTaskFlow 默认的 taskflow 实现类
+     * @param filtersNode     xml 对应的 java 对象
+     * @param useSpring       是否使用spring ico 容器
+     * @throws ClassNotFoundException         找不到class 异常
+     * @throws OperationNotSupportedException 操作不支持异常
+     */
     private void initFilter(DefaultTaskFlow defaultTaskFlow, FiltersNode filtersNode, Boolean useSpring) throws
             ClassNotFoundException, OperationNotSupportedException {
         // 组装过滤器
@@ -205,7 +242,7 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
             for (FilterNode filterNode : filtersNode.getFilterList()) {
                 Filter filter;
                 // 是否使用spring
-                if (useSpring) {
+                if (useSpring != null && useSpring) {
                     filter = SpringBeanHelper.getBean(filterNode.getBeanId(), Filter.class);
                 } else {
                     filter = ClassLoaderUtils.getObject(filterNode.getClassName());
@@ -218,6 +255,12 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
     }
 
 
+    /**
+     * 设置一些基础的属性
+     *
+     * @param defaultTaskFlow 默认的 taskflow 实现类
+     * @param taskFlowNode    xml 对应的 java 对象
+     */
     private void initBase(DefaultTaskFlow defaultTaskFlow, TaskFlowNode taskFlowNode) {
         if (StringUtils.isBlank(taskFlowNode.getId()) || StringUtils.isBlank(taskFlowNode.getStartTask())) {
             throw new IllegalArgumentException("taskFlowId or startTask must not be null!!!");
