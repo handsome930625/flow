@@ -16,6 +16,7 @@ public interface BaseBuilder {
      * description: 创建taskflow
      *
      * @return 返回taskflow 集合
+     * @throws Exception 可能在创建过程中出现的异常
      * @author 王亦杰
      * @date 2018/8/24 15:01
      */

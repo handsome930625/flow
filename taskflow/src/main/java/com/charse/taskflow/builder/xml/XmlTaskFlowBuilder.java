@@ -167,7 +167,7 @@ public class XmlTaskFlowBuilder implements BaseBuilder {
     }
 
     private void initTask(DefaultTaskFlow defaultTaskFlow, List<TaskNode> taskList, Boolean useSpring) throws ClassNotFoundException, OperationNotSupportedException {
-        Map<String, ITask> taskMap = new HashMap<>();
+        Map<String, ITask> taskMap = new HashMap<>(10);
         for (TaskNode taskNode : taskList) {
             DefaultTask task = new DefaultTask();
             String taskId = taskNode.getTaskId();

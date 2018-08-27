@@ -35,7 +35,7 @@ public class DefaultTaskFlowManager implements ITaskFlowManager {
     public void initManager() throws Exception {
         BaseBuilder configure = new XmlTaskFlowBuilder(this.resources);
         List<ITaskFlow> taskFlowList = configure.buildTaskFlows();
-        Map<String, ITaskFlow> taskFlowMap = new HashMap<>();
+        Map<String, ITaskFlow> taskFlowMap = new HashMap<>(10);
         for (ITaskFlow taskFlow : taskFlowList) {
             taskFlowMap.put(taskFlow.getId(), taskFlow);
         }

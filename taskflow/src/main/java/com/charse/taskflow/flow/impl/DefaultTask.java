@@ -62,7 +62,7 @@ public class DefaultTask implements ITask {
             String road = resultNode.getRoad().trim();
             if (road.startsWith("#")) {
                 SpringExpressionUtils el = SpringExpressionUtils.getInstance();
-                Map<String, Object> contextParamMap = new HashMap<>();
+                Map<String, Object> contextParamMap = new HashMap<>(3, 1f);
                 contextParamMap.put("R", resultValue);
                 contextParamMap.put("P", params);
                 contextParamMap.put("C", taskFlowContext);

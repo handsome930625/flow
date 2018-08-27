@@ -14,6 +14,8 @@ public interface ITaskFlowManager {
      * <p>功能描述: 初始化taskflow 管理器</p>
      * <p>创建人: wangyj </p>
      * <p>创建日期: 2018/4/10 22:06 </p>
+     *
+     * @throws Exception 可能在初始化过程中出现的异常
      */
     void initManager() throws Exception;
 
