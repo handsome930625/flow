@@ -3,7 +3,7 @@ package com.charse.taskflow.exception;
 /**
  * @Author: wangyj
  * @Date: 2018/4/11 20:05
- * @Description: 解析异常
+ * @Description: xml解析异常
  **/
 public class DefinitionException extends RuntimeException {
 

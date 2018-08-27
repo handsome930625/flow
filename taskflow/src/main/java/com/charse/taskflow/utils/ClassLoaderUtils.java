@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * description:
+ * description: 本地类加载器
  *
- * @author 王亦杰（yijie.wang01@ucarinc.com）
+ * @author 王亦杰
  * @version 1.0
  * @date 2018/8/25 9:12
  */

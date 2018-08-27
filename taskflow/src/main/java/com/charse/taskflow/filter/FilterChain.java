@@ -9,26 +9,23 @@ import java.util.List;
 /**
  * @Author: wangyj
  * @Date: 2018/4/11 21:09
- * @Description:
+ * @Description: 过滤链chain
  **/
 public class FilterChain {
-
     /**
-     * 过滤链
+     * 过滤链迭代器
      */
-    private List<Filter> filters;
-
     private Iterator<Filter> iterator;
 
     public FilterChain(List<Filter> filters) {
         if (filters == null) {
             filters = Collections.emptyList();
         }
-        this.filters = filters;
+        this.iterator = filters.iterator();
     }
 
     /**
-     * <p>功能描述: </p>
+     * <p>功能描述: 放行</p>
      * <p>创建人: wangyj </p>
      * <p>创建日期: 2018/4/11 21:28 </p>
      *
@@ -38,9 +35,6 @@ public class FilterChain {
      */
     @SuppressWarnings("unchecked")
     public void doFilter(Object params, TaskFlowContext taskFlowContext) throws Exception {
-        if (this.iterator == null) {
-            this.iterator = this.filters.iterator();
-        }
         if (this.iterator.hasNext()) {
             Filter nextFilter = this.iterator.next();
             nextFilter.doFilter(params, taskFlowContext, this);

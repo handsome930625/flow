@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @Author: wangyj
  * @Date: 2018/4/11 21:06
- * @Description: 头过滤器
+ * @Description: 头过滤器，用来记录一些基本信息
  **/
 public class FirstFilter implements Filter<Object> {
 
