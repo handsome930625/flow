@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<matchservices xmlns="http://www.charse.com.cn"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.charse.com.cn matchservices.xsd">
+    <service url="">
+        <return return-class-type="" judge-method="" success-method="" failed-method=""/>
+        <param class="" name="">
+            <validate>NOTBLANK</validate>
+        </param>
+    </service>
+</matchservices>

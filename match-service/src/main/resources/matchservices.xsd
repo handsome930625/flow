@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.charse.com.cn"
+           xmlns="http://www.charse.com.cn"
+           elementFormDefault="qualified">
+
+    <xs:element name="matchservices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="service" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="return">
+                                <xs:complexType>
+                                    <xs:attribute name="return-class-type" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                                rpc返回值类型
+                                             ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="judge-method" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                          判断调用是否成功方法，必须是布尔值
+                                            ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="success-method" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                                    成功调用方法
+                                                ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="failed-method" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                                    失败调用方法
+                                                ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="param" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="validate" minOccurs="0">
+                                            <xs:simpleType>
+                                                <xs:annotation>
+                                                    <xs:documentation>
+                                                        <![CDATA[
+                                                    验证参数
+                                                        ]]>
+                                                    </xs:documentation>
+                                                </xs:annotation>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="NotNull"/>
+                                                    <xs:enumeration value="NotBlank"/>
+                                                    <xs:enumeration value="NotEmpty"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                                    请求参数名
+                                                ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="class" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                                    请求参数类型
+                                                ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="url" type="xs:string" use="required">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    <![CDATA[
+                                          rpc服务url字符串
+                                    ]]>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
