@@ -7,12 +7,38 @@
     <xs:element name="matchservices">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="validate-utils" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="util">
+                                <xs:complexType>
+                                    <xs:attribute name="name" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                             ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="class-name" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                <![CDATA[
+                                             ]]>
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="service" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="return">
                                 <xs:complexType>
-                                    <xs:attribute name="return-class-type" type="xs:string" use="required">
+                                    <xs:attribute name="return-class-name" type="xs:string" use="required">
                                         <xs:annotation>
                                             <xs:documentation>
                                                 <![CDATA[
@@ -53,8 +79,8 @@
                             <xs:element name="param" maxOccurs="unbounded" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="validate" minOccurs="0">
-                                            <xs:simpleType>
+                                        <xs:element name="validate" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
                                                 <xs:annotation>
                                                     <xs:documentation>
                                                         <![CDATA[
@@ -62,12 +88,25 @@
                                                         ]]>
                                                     </xs:documentation>
                                                 </xs:annotation>
-                                                <xs:restriction base="xs:string">
-                                                    <xs:enumeration value="NotNull"/>
-                                                    <xs:enumeration value="NotBlank"/>
-                                                    <xs:enumeration value="NotEmpty"/>
-                                                </xs:restriction>
-                                            </xs:simpleType>
+                                                <xs:attribute name="expression" type="xs:string" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            <![CDATA[
+
+                                                            ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="message" type="xs:string" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            <![CDATA[
+
+                                                            ]]>
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
                                     <xs:attribute name="name" type="xs:string">
@@ -79,7 +118,7 @@
                                             </xs:documentation>
                                         </xs:annotation>
                                     </xs:attribute>
-                                    <xs:attribute name="class" type="xs:string" use="required">
+                                    <xs:attribute name="class-name" type="xs:string" use="required">
                                         <xs:annotation>
                                             <xs:documentation>
                                                 <![CDATA[

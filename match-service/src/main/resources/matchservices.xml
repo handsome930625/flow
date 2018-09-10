@@ -1,11 +1,29 @@
 <?xml version="1.0"?>
 <matchservices xmlns="http://www.charse.com.cn"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://www.charse.com.cn matchservices.xsd">
-    <service url="">
-        <return return-class-type="" judge-method="" success-method="" failed-method=""/>
-        <param class="" name="">
-            <validate>NOTBLANK</validate>
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.charse.com.cn matchservices.xsd">
+    <validate-utils>
+        <util name="StringUtils" class-name="org.apache.commons.lang3.StringUtils"/>
+    </validate-utils>
+    <service url="/action/4s">
+        <return return-class-name="com.charse.matchservice.Res" judge-method="#result.isSuccess()"
+                success-method="#result.getRe()"
+                failed-method="#result.getMsg()"/>
+        <param class-name="String" name="userName">
+            <validate expression="#StringUtils.isNotBlank(#param)" message="用户名不能为空"/>
+        </param>
+        <param class-name="String" name="password">
+            <validate expression="#StringUtils.isNotBlank(#param)" message="密码不能为空"/>
+        </param>
+    </service>
+
+    <service url="/action/4s/object">
+        <return return-class-name="com.charse.matchservice.Res" judge-method="#result.isSuccess()"
+                success-method="#result.getRe()"
+                failed-method="#result.getMsg()"/>
+        <param class-name="com.charse.matchservice.SaveBankInfoParam">
+            <validate expression="#param != null" message="银行卡信息对象不能为空"/>
+            <validate expression="#StringUtils.isNotBlank(#param.cityName)" message="银行卡信息城市不能为空"/>
         </param>
     </service>
 </matchservices>
