@@ -23,7 +23,7 @@ import java.util.Map;
  * 2.根据aid找到对应的透传服务、参数类型、参数校验
  * 3.根据返回值选择
  *
- * @author 王亦杰（yijie.wang01@ucarinc.com）
+ * @author 王亦杰
  * @version 1.0
  * @date 2018/9/10 19:22
  */

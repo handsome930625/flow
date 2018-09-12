@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * description:
  *
- * @author 王亦杰（yijie.wang01@ucarinc.com）
- * @version 1.0
+ * @author 王亦杰
+ *  * @version 1.0
  * @date 2018/9/10 19:55
  */
 @XStreamAlias("param")
